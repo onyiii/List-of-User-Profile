@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import User from "./components/User";
+import AllUsers from "./components/AllUsers";
+import NoMatch from "./components/NoMatch";
+import ErrorBoundary from "./components/ErrorBoundary";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ErrorBoundary>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="user" element={<User />}>
+            <Route path="all-users" element={<AllUsers />} />
+          </Route>
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
+      </ErrorBoundary>
     </div>
   );
 }
